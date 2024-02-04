@@ -10,6 +10,11 @@ var selDamageNum = 0;
 var servantList = null;
 
 $(function(){
+    // 初期行用意
+    for (let cnt = 0; cnt < 14; cnt++){
+        copyRow()
+    }
+
     /**
      * フォーカスイベント
      */
