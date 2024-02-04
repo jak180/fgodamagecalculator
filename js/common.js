@@ -623,4 +623,74 @@ function initPC() {
         
         return true;
     });
+
+    /**
+     * セレクトボックス変更イベント
+     */
+    $(document).on("change", ".select_np_star", function () {
+        // NPスター計算
+        calcRate();
+
+        // バフを保持
+
+        // 与ダメ専用
+        $("#na_" + $("#prob_recNumber").val()).val($("#NA").val());
+        $("#sr_" + $("#prob_recNumber").val()).val($("#SR").val());
+        $("#sr_buff_" + $("#prob_recNumber").val()).val($("#SR_buff").val());
+        $("#sr_enemy_" + $("#prob_recNumber").val()).val($("#SR_enemy").val());
+        $("#ex_hit_" + $("#prob_recNumber").val()).val($("#ex_hit").val());
+
+        // 被ダメ専用
+        $("#nd_" + $("#prob_recNumber").val()).val($("#ND").val());
+        $("#nd_buff_" + $("#prob_recNumber").val()).val($("#ND_buff").val());
+
+        // 共通
+        $("#na_buff_" + $("#prob_recNumber").val()).val($("#NA_buff").val());
+        $("#b_hit_" + $("#prob_recNumber").val()).val($("#b_hit").val());
+        $("#a_hit_" + $("#prob_recNumber").val()).val($("#a_hit").val());
+        $("#q_hit_" + $("#prob_recNumber").val()).val($("#q_hit").val());
+        $("#np_hit_" + $("#prob_recNumber").val()).val($("#np_hit").val());
+        $("#na_enemy_" + $("#prob_recNumber").val()).val($("#NA_enemy").val());
+    });
+
+    //サーヴァント情報を反映させる
+    $(document).on("click", "#btn-apply", function() {
+        if (servantApply()) {
+            // NPスター計算
+            calcRate();
+            // サーヴァント情報を保持
+            $("#np_star_servant_no_" + $("#prob_recNumber").val()).val($("#servant-name").val());
+            $("#np_star_servant_class_" + $("#prob_recNumber").val()).val($("#servant-class").val());
+            $("#np_star_servant_rare_" + $("#prob_recNumber").val()).val($("#servant-rare").val());
+
+            // バフを保持
+            $("#nd_" + $("#prob_recNumber").val()).val($("#ND").val());
+            $("#nd_buff_" + $("#prob_recNumber").val()).val($("#ND_buff").val());
+
+            $("#na_" + $("#prob_recNumber").val()).val($("#NA").val());
+            $("#na_buff_" + $("#prob_recNumber").val()).val($("#NA_buff").val());
+            $("#sr_" + $("#prob_recNumber").val()).val($("#SR").val());
+            $("#sr_buff_" + $("#prob_recNumber").val()).val($("#SR_buff").val());
+            $("#b_hit_" + $("#prob_recNumber").val()).val($("#b_hit").val());
+            $("#a_hit_" + $("#prob_recNumber").val()).val($("#a_hit").val());
+            $("#q_hit_" + $("#prob_recNumber").val()).val($("#q_hit").val());
+            $("#ex_hit_" + $("#prob_recNumber").val()).val($("#ex_hit").val());
+            $("#np_hit_" + $("#prob_recNumber").val()).val($("#np_hit").val());
+            $("#na_enemy_" + $("#prob_recNumber").val()).val($("#NA_enemy").val());
+            $("#sr_enemy_" + $("#prob_recNumber").val()).val($("#SR_enemy").val());
+        }
+
+        return false;
+    });
+
+    /**
+     * サーヴァント検索―クラス・レアリティ変更イベント
+     */
+    $(document).on("change", ".search_sarvant_select", function () {
+        // サーヴァントセレクトボックスを再作成
+        remakeSearchServantSelectBox();
+
+        // サーヴァント情報表示
+        servantInfo();
+    });
 }
